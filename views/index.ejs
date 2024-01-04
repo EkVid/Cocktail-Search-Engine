@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cocktail Search Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Titan+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+
+  <body>
+    <% if (locals.error) { %>
+    <div class="error-message">
+      <p><%= error %></p>
+      <h2 >404</h1>
+    </div>
+    <% } else { %>
+    <h1>What cocktail recipe are you looking for?</h1>
+    <form action="/" id="form" class="form" method="POST">
+      <label for="cocktailName">Search by Cocktail Name:</label>
+      <input
+        type="text"
+        id="cocktailName"
+        name="cocktailName"
+        placeholder="Enter name"
+      />
+      <button type="submit" class="form-submit">Search</button>
+    </form>
+    <div class="total">
+      <div class="description">
+        <p>Name: <%= data.strDrink %></p>
+        <p class="user">Category: <%= data.strCategory %></p>
+        <p>Glass: <%= data.strGlass %></p>
+        <p>Instructions: <%= data.strInstructions %></p>
+        <% if (data.strAlcoholic == "Alcoholic"){ %>
+        <p>Alcoholic: Yes</p>
+        <% } else{%>
+        <p>Alcoholic: No</p>
+        <% } %>
+        <p>Ingredients:</p>
+        <ul>
+          <% for (let i = 1; i <= 15; i++) { %> <% const ingredient =
+          data[`strIngredient${i}`]; %> <% const measure =
+          data[`strMeasure${i}`]; %> <% if (ingredient && measure) { %>
+          <li><%= measure %> <%= ingredient %></li>
+          <% } else if (ingredient) { %>
+          <li><%= ingredient %></li>
+          <% }} %>
+        </ul>
+      </div>
+      <div class="alch_img">
+        <img src="<%= data.strDrinkThumb %>" alt="Cocktail Image" />
+      </div>
+    </div>
+    <% } %>
+  </body>
+</html>
