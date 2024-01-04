@@ -14,10 +14,10 @@ app.get("/", async (req, res) => {
       "https://www.thecocktaildb.com/api/json/v1/1/random.php"
     );
     const response = result.data.drinks[0];
-    res.render("index", { data: response });
+    res.render("index.ejs", { data: response });
   } catch (error) {
     console.error("Failed to make request:", error.message);
-    res.render("index", {
+    res.render("index.ejs", {
       error: error.message,
     });
   }
